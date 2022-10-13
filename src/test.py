@@ -41,8 +41,9 @@ def preprocess_script_csv(c):
     return '\n'.join(preproc_lines)
 
 def test(args):
-    #test = pd.read_csv('data/test.csv')
-    test = pd.read_csv('data/preprocessed_test.csv')
+    test = pd.read_csv('data/test.csv')
+    test['code1'] = test['code1'].apply(preprocess_script_csv)
+    test['code2'] = test['code2'].apply(preprocess_script_csv)
 
     model = CrossEncoder(args.pretrained, num_labels=1)
     model.tokenizer.truncation_side = 'left'
